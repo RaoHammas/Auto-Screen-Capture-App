@@ -1,4 +1,6 @@
-﻿namespace AutoScreenCaptureApp;
+﻿using System.Threading;
+
+namespace AutoScreenCaptureApp;
 
 public partial class MainWindowViewModel : ObservableObject, IMainWindowViewModel
 {
@@ -30,7 +32,6 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
         IntervalTime = 10;
         IsCapturing = false;
         CaptureCount = 0;
-
     }
 
     [RelayCommand]
@@ -59,7 +60,7 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
 
                 _cancellationTokenSource = new CancellationTokenSource();
                 var progress = new Progress<int>(count => { CaptureCount = count; });
-                await _desktopCaptureService.StartCaptureAsync(TimeSpan.FromSeconds(IntervalTime), SavePath,
+                _ = _desktopCaptureService.StartCaptureAsync(TimeSpan.FromSeconds(IntervalTime), SavePath,
                     progress, _cancellationTokenSource.Token);
             }
         }
@@ -85,6 +86,7 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
     [RelayCommand]
     public void CloseApp()
     {
+        _cancellationTokenSource.Cancel();
         Environment.Exit(0);
     }
 
@@ -93,8 +95,8 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
     {
         try
         {
-            Process myProcess = new Process();
-            myProcess.StartInfo.UseShellExecute = true; 
+            var myProcess = new Process();
+            myProcess.StartInfo.UseShellExecute = true;
             myProcess.StartInfo.FileName = "https://github.com/RaoHammas";
             myProcess.Start();
         }

@@ -57,6 +57,7 @@
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding IntervalTime}" />
 
+
                         <TextBox
                             Grid.Row="1"
                             Grid.Column="0"
@@ -74,6 +75,7 @@
                             materialDesign:ButtonAssist.CornerRadius="8"
                             Command="{Binding SelectSavePathCommand}"
                             Content="..."
+                            Style="{DynamicResource MaterialDesignFlatMidBgButton}"
                             ToolTip="Click here to choose a folder path where you want to save the screenshots" />
 
                         <TextBlock
@@ -114,7 +116,16 @@
                             HorizontalAlignment="Stretch"
                             materialDesign:ButtonAssist.CornerRadius="8"
                             Command="{Binding ToggleCapturingCommand}">
-                            Start
+                            <Button.Style>
+                                <Style BasedOn="{StaticResource MaterialDesignFlatMidBgButton}" TargetType="Button">
+                                    <Setter Property="Content" Value="Start" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsCapturing}" Value="True">
+                                            <Setter Property="Content" Value="Stop" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                         </Button>
                     </materialDesign:Badged>
 

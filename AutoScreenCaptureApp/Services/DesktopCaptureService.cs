@@ -11,8 +11,8 @@ public class DesktopCaptureService : IDesktopCaptureService
             var screenshot = CaptureScreen();
             var filePath = Path.Combine(savePath, $"screenshot_{DateTime.Now:yyyyMMdd_HHmmss}.png");
             screenshot.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
-
-            progress.Report(++screenshotCount);
+            screenshotCount++;
+            progress.Report(screenshotCount);
             await Task.Delay(interval, cancellationToken);
         }
 
