@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ApplicationIcon>icons8-windows-snipping-tool-48.ico</ApplicationIcon>
+		<Title>A small tool to capture active display</Title>
+		<Authors>Rao Hammas</Authors>
+		<Description>An application to capture active display.</Description>
+		<Copyright>All Rights Reserved</Copyright>
+		<PackageIcon>icons8-windows-snipping-tool-48.png</PackageIcon>
+		<PackageTags>Screen capture</PackageTags>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="icons8-close-48.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="icons8-windows-snipping-tool-48.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="icons8-close-48.png" />
+	  <Resource Include="icons8-windows-snipping-tool-48.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="icons8-windows-snipping-tool-48.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+</Project>
