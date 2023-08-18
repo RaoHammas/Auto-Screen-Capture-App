@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace AutoScreenCaptureApp;
+﻿namespace AutoScreenCaptureApp.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

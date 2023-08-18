@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace AutoScreenCaptureApp;
+﻿namespace AutoScreenCaptureApp.ViewModels;
 
 public partial class MainWindowViewModel : ObservableObject, IMainWindowViewModel
 {
@@ -8,10 +6,12 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
     private readonly IAppHideShowService _appHideShowService;
     private readonly IDesktopCaptureService _desktopCaptureService;
     private readonly IDialogService _dialogService;
+    private readonly IGlobalHotKeysService _globalHotKeysService;
     [ObservableProperty] private int _intervalTime;
     [ObservableProperty] private string _savePath;
     [ObservableProperty] private bool _isCapturing;
     [ObservableProperty] private int _captureCount;
+    [ObservableProperty] private bool _isAppVisible;
 
     private CancellationTokenSource _cancellationTokenSource;
 
@@ -19,19 +19,22 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
         IFolderPickerService folderPickerService,
         IAppHideShowService appHideShowService,
         IDesktopCaptureService desktopCaptureService,
-        IDialogService dialogService
+        IDialogService dialogService,
+        IGlobalHotKeysService globalHotKeysService
     )
     {
         _folderPickerService = folderPickerService;
         _appHideShowService = appHideShowService;
         _desktopCaptureService = desktopCaptureService;
         _dialogService = dialogService;
+        _globalHotKeysService = globalHotKeysService;
         _cancellationTokenSource = new CancellationTokenSource();
 
         SavePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         IntervalTime = 10;
         IsCapturing = false;
         CaptureCount = 0;
+        IsAppVisible = true;
     }
 
     [RelayCommand]
@@ -48,6 +51,7 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
             {
                 if (!Directory.Exists(SavePath))
                 {
+                    await _dialogService.ShowMessage("Invalid save path.");
                     return;
                 }
 
@@ -77,10 +81,25 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
         SavePath = _folderPickerService.PickFolder();
     }
 
+
     [RelayCommand]
-    public void HideApp(object win)
+    public void ToggleShowHide(object win)
     {
-        //_appHideShowService.HideApplication(win);
+        if (!IsAppVisible)
+        {
+            _appHideShowService.ShowApplication(win);
+            _globalHotKeysService.UnRegisterShowAppHotKey();
+            IsAppVisible = true;
+        }
+        else
+        {
+            _dialogService.ShowMessage(
+                "App is now hidden from the Task-bar and Tab-Menu.\n To bring it back press Ctrl + Alt + Enter");
+
+            _appHideShowService.HideApplication(win);
+            _globalHotKeysService.RegisterShowAppHotKey(ToggleShowHideCommand, win);
+            IsAppVisible = false;
+        }
     }
 
     [RelayCommand]

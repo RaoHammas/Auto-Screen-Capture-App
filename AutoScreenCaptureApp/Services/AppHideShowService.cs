@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace AutoScreenCaptureApp.Services;
+﻿namespace AutoScreenCaptureApp.Services;
 
 public class AppHideShowService : IAppHideShowService
 {

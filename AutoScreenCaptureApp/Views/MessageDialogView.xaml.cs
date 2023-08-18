@@ -1,6 +1,6 @@
 ﻿using UserControl = System.Windows.Controls.UserControl;
 
-namespace AutoScreenCaptureApp
+namespace AutoScreenCaptureApp.Views
 {
     /// <summary>
     /// Interaction logic for MessageDialogView.xaml

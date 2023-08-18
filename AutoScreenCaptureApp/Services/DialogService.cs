@@ -1,6 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-
-namespace AutoScreenCaptureApp.Services;
+﻿namespace AutoScreenCaptureApp.Services;
 
 public class DialogService : IDialogService
 {

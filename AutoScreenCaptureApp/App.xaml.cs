@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using Application = System.Windows.Application;
-
-namespace AutoScreenCaptureApp;
+﻿namespace AutoScreenCaptureApp;
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -30,6 +27,7 @@ public partial class App : Application
         services.AddSingleton<IFolderPickerService, FolderPickerService>();
         services.AddSingleton<IDesktopCaptureService, DesktopCaptureService>();
         services.AddSingleton<IDialogService, DialogService>();
+        services.AddSingleton<IGlobalHotKeysService, GlobalHotKeysService>();
 
         return services.BuildServiceProvider();
     }
