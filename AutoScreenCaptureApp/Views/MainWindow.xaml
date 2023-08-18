@@ -11,6 +11,7 @@
     Padding="0"
     d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel,
                                      IsDesignTimeCreatable=False}"
+    Background="WhiteSmoke"
     ResizeMode="NoResize"
     SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterScreen"
@@ -103,12 +104,9 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Margin="0,-7,0,0"
-                        HorizontalAlignment="Stretch"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Stretch"
-                        Badge="{Binding CaptureCount, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, Mode=OneWay}"
-                        BadgeBackground="PaleVioletRed"
-                        BadgeColorZoneMode="PrimaryLight"
-                        BadgeForeground="White">
+                        Badge="{Binding CaptureCount, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, Mode=OneWay}">
                         <Button
                             Width="100"
                             Height="80"
