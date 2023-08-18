@@ -17,6 +17,7 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageProjectUrl>https://github.com/RaoHammas/Auto-Screen-Capture-App</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/RaoHammas/Auto-Screen-Capture-App</RepositoryUrl>
+		<Platforms>AnyCPU;x64;x86</Platforms>
 	</PropertyGroup>
 	<PropertyGroup>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
