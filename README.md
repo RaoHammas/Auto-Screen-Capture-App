@@ -1,6 +1,9 @@
 <h2><img align="center" height="45" src="https://github.com/RaoHammas/Auto-Screen-Capture-App/blob/master/AutoScreenCaptureApp/Images/icons8-windows-snipping-tool-48.png?raw=true">  Auto Screen Capture</h2>
 
-Download `v1.0.0.0` from [here.](https://github.com/RaoHammas/Auto-Screen-Capture-App/releases)<br />
+Download `v1.0.0.0` from [here.](https://github.com/RaoHammas/Auto-Screen-Capture-App/releases)<br /><br />
+
+[![v1.0.0.1 Build](https://github.com/RaoHammas/Auto-Screen-Capture-App/actions/workflows/dotnet-desktop.yml/badge.svg?branch=master)](https://github.com/RaoHammas/Auto-Screen-Capture-App/actions/workflows/dotnet-desktop.yml) 
+
 
 ### Features:  
 
