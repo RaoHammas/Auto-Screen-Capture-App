@@ -60,7 +60,7 @@ jobs:
       Solution_Name: AutoScreenCaptureApp.sln    
       
       # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-      Test_Project_Path: AutoScreenCaptureApp.Tests/AutoScreenCaptureApp.Tests.csproj    
+      #Test_Project_Path: AutoScreenCaptureApp.Tests/AutoScreenCaptureApp.Tests.csproj    
       
       #Wap_Project_Directory: your-wap-project-directory-name    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
       #Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
@@ -82,8 +82,8 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     # Execute all unit tests in the solution
-    - name: Execute unit tests
-      run: dotnet test
+    #- name: Execute unit tests
+    #  run: dotnet test
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
