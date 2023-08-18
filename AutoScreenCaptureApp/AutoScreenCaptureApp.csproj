@@ -18,7 +18,9 @@
 		<PackageProjectUrl>https://github.com/RaoHammas/Auto-Screen-Capture-App</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/RaoHammas/Auto-Screen-Capture-App</RepositoryUrl>
 	</PropertyGroup>
-
+	<PropertyGroup>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="icons8-close-48.png" />
 	</ItemGroup>
