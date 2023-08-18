@@ -7,9 +7,10 @@ public interface IMainWindowViewModel
     public bool IsCapturing { get; set; }
     public bool IsAppVisible { get; set; }
     public int CaptureCount { get; set; }
+    public CancellationTokenSource CancellationTokenSource { get; set; }
 
     Task ToggleCapturingAsync();
     void SelectSavePath();
-    public void ToggleShowHide(object win);
+    public void ToggleShowHide();
     public Task NavigateToGithub();
 }

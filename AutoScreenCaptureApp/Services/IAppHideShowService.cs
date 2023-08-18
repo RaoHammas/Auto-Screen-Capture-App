@@ -2,6 +2,6 @@
 
 public interface IAppHideShowService
 {
-    void HideApplication(object window);
-    void ShowApplication(object window);
+    void HideApplication();
+    void ShowApplication();
 }

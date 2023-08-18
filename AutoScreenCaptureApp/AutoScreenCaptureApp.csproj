@@ -24,6 +24,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Page Remove="AppService.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Content Include="Images\icons8-windows-snipping-tool-48.ico" />
 	</ItemGroup>
 

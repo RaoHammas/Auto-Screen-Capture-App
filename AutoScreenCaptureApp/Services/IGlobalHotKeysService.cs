@@ -2,6 +2,6 @@
 
 public interface IGlobalHotKeysService
 {
-    void RegisterShowAppHotKey(ICommand command, object commandParam);
+    void RegisterShowAppHotKey(Action action);
     void UnRegisterShowAppHotKey();
 }

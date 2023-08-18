@@ -2,25 +2,31 @@
 
 public partial class MainWindowViewModel : ObservableObject, IMainWindowViewModel
 {
+    private readonly IAppService _appService;
     private readonly IFolderPickerService _folderPickerService;
     private readonly IAppHideShowService _appHideShowService;
     private readonly IDesktopCaptureService _desktopCaptureService;
     private readonly IDialogService _dialogService;
     private readonly IGlobalHotKeysService _globalHotKeysService;
+    private readonly IProcessService _processService;
+    private readonly IFileOperationsService _fileOperationsService;
+
     [ObservableProperty] private int _intervalTime;
     [ObservableProperty] private string _savePath;
     [ObservableProperty] private bool _isCapturing;
     [ObservableProperty] private int _captureCount;
     [ObservableProperty] private bool _isAppVisible;
-
-    private CancellationTokenSource _cancellationTokenSource;
+    [ObservableProperty] private CancellationTokenSource _cancellationTokenSource;
 
     public MainWindowViewModel(
         IFolderPickerService folderPickerService,
         IAppHideShowService appHideShowService,
         IDesktopCaptureService desktopCaptureService,
         IDialogService dialogService,
-        IGlobalHotKeysService globalHotKeysService
+        IGlobalHotKeysService globalHotKeysService,
+        IProcessService processService,
+        IAppService appService,
+        IFileOperationsService fileOperationsService
     )
     {
         _folderPickerService = folderPickerService;
@@ -28,9 +34,12 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
         _desktopCaptureService = desktopCaptureService;
         _dialogService = dialogService;
         _globalHotKeysService = globalHotKeysService;
-        _cancellationTokenSource = new CancellationTokenSource();
+        _processService = processService;
+        _appService = appService;
+        _fileOperationsService = fileOperationsService;
+        CancellationTokenSource = new CancellationTokenSource();
 
-        SavePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        SavePath = fileOperationsService.GetSystemFolderPath(SpecialFolder.Desktop);
         IntervalTime = 10;
         IsCapturing = false;
         CaptureCount = 0;
@@ -44,12 +53,12 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
         {
             if (IsCapturing)
             {
-                _cancellationTokenSource.Cancel();
+                CancellationTokenSource.Cancel();
                 IsCapturing = false;
             }
             else
             {
-                if (!Directory.Exists(SavePath))
+                if (!_fileOperationsService.Exists(SavePath))
                 {
                     await _dialogService.ShowMessage("Invalid save path.");
                     return;
@@ -62,10 +71,10 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
 
                 IsCapturing = true;
 
-                _cancellationTokenSource = new CancellationTokenSource();
-                var progress = new Progress<int>(count => { CaptureCount = count; });
+                CancellationTokenSource = new CancellationTokenSource();
+                    var progress = new Progress<int>(count => { CaptureCount = count; });
                 _ = _desktopCaptureService.StartCaptureAsync(TimeSpan.FromSeconds(IntervalTime), SavePath,
-                    progress, _cancellationTokenSource.Token);
+                    progress, CancellationTokenSource.Token);
             }
         }
         catch (Exception ex)
@@ -83,21 +92,21 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
 
 
     [RelayCommand]
-    public void ToggleShowHide(object win)
+    public void ToggleShowHide()
     {
         if (!IsAppVisible)
         {
-            _appHideShowService.ShowApplication(win);
+            _appHideShowService.ShowApplication();
             _globalHotKeysService.UnRegisterShowAppHotKey();
             IsAppVisible = true;
         }
         else
         {
             _dialogService.ShowMessage(
-                "App is now hidden from the Task-bar and Tab-Menu.\n To bring it back press Ctrl + Alt + Enter");
+                "AppService is now hidden from the Task-bar and Tab-Menu.\n To bring it back press Ctrl + Alt + Enter");
 
-            _appHideShowService.HideApplication(win);
-            _globalHotKeysService.RegisterShowAppHotKey(ToggleShowHideCommand, win);
+            _appHideShowService.HideApplication();
+            _globalHotKeysService.RegisterShowAppHotKey(ToggleShowHide);
             IsAppVisible = false;
         }
     }
@@ -105,8 +114,8 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
     [RelayCommand]
     public void CloseApp()
     {
-        _cancellationTokenSource.Cancel();
-        Environment.Exit(0);
+        CancellationTokenSource.Cancel();
+        _appService.Shutdown();
     }
 
     [RelayCommand]
@@ -114,12 +123,9 @@ public partial class MainWindowViewModel : ObservableObject, IMainWindowViewMode
     {
         try
         {
-            var myProcess = new Process();
-            myProcess.StartInfo.UseShellExecute = true;
-            myProcess.StartInfo.FileName = "https://github.com/RaoHammas";
-            myProcess.Start();
+            _processService.Start("https://github.com/RaoHammas");
         }
-        catch (Exception ex)
+        catch (InvalidOperationException ex)
         {
             await _dialogService.ShowMessage(ex.Message);
         }

@@ -1,22 +1,19 @@
-﻿namespace AutoScreenCaptureApp.Services;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace AutoScreenCaptureApp.Services;
+
+[ExcludeFromCodeCoverage]
 public class AppHideShowService : IAppHideShowService
 {
-    public void HideApplication(object win)
+    public void HideApplication()
     {
-        if (win is Window window)
-        {
-            window.ShowInTaskbar = false;
-            window.Visibility = Visibility.Hidden;
-        }
+        Application.Current.MainWindow!.ShowInTaskbar = false;
+        Application.Current.MainWindow!.Visibility = Visibility.Hidden;
     }
 
-    public void ShowApplication(object win)
+    public void ShowApplication()
     {
-        if (win is Window window)
-        {
-            window.ShowInTaskbar = true;
-            window.Visibility = Visibility.Visible;
-        }
+        Application.Current.MainWindow!.ShowInTaskbar = true;
+        Application.Current.MainWindow!.Visibility = Visibility.Visible;
     }
 }

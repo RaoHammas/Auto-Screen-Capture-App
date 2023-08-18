@@ -134,10 +134,9 @@
                         HorizontalAlignment="Center"
                         materialDesign:ButtonAssist.CornerRadius="8"
                         Command="{Binding ToggleShowHideCommand}"
-                        CommandParameter="{Binding ElementName=Win}"
                         Cursor="Hand"
                         Style="{StaticResource MaterialDesignFlatButton}"
-                        ToolTip="Click to hide the app. You can see it again by Ctrl + Alt + Enter">
+                        ToolTip="Click to hide the appService. You can see it again by Ctrl + Alt + Enter">
                         <TextBlock TextDecorations="UnderLine">Click to Hide</TextBlock>
                     </Button>
 
