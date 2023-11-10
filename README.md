@@ -20,9 +20,16 @@ Download `v1.0.0.0` from [here.](https://github.com/RaoHammas/Auto-Screen-Captur
 
 <br /><br />Design and Developed with ❤️<br /><br />
 
-### Image and video:<br/>
-
 ![image](https://github.com/RaoHammas/Auto-Screen-Capture-App/assets/16499626/92dbdbcd-16c4-4417-8d81-ada357f4c5eb)
 
 https://github.com/RaoHammas/Auto-Screen-Capture-App/assets/16499626/f7953796-9e96-4351-834a-8dd007a8188f
 
+---
+
+### **_If you like this app, Please consider donating. Thanks 😊_**  
+
+<a href="https://www.buymeacoffee.com/hammas" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+<img src="https://i.imgur.com/Grv4olx.png" width="200" height="200" />
+
+---
